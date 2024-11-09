@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask Her Out</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            background-size: 200% 200%;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            display: none; /* Initially hide the body */
+            animation: gradientShift 10s infinite alternate;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 1000; /* Ensure it's above all content */
+        }
+
+        .loader::before {
+            content: '';
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #ff6b81; /* Pink */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff6b81;
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            opacity: 0;
+            animation: textFadeIn 2s forwards;
+        }
+
+        p {
+            font-size: 1.3em;
+            margin: 10px 0;
+            opacity: 0;
+            animation: textFadeIn 2s forwards 0.5s;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn a {
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 0 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn a:hover {
+            background-color: #ff3b2f;
+            transform: scale(1.05);
+        }
+
+        /* Blurring effect for the background */
+        .blur {
+            filter: blur(5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            p {
+                font-size: 1.1em;
+            }
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            .btn a {
+                padding: 10px 20px;
+                font-size: 1em;
+                margin: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .btn a {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .container .copyright a {
+            text-decoration: none;
+        }
+
+        /* Heartfall Animation */
+        .heart {
+            position: fixed;
+            color: #ff6b81;
+            font-size: 1.5em;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="backgroundAudio" src="Tumi_ki_Amar.mp3" loop autoplay></audio>
+
+    <div class="loader"></div> <!-- Loader element -->
+
+    <div class="container">
+        <img src="https://media1.tenor.com/m/8RB1JQ3OZOEAAAAd/chibi-cat.gif" alt="Animated chibi cat gif" width="100%" />
+        <h1>Will You Be My Valentine?</h1>
+        <p>তুমি কি আমার ভ্যালেন্টাইন হবে।🤗</p>
+        <div class="btn">
+            <a href="yes.html">Yes</a>
+            <a href="no1.html">No</a>
+        </div>
+
+        <p class="copyright">© Developed by <a href="https://m.facebook.com/LikhonDasAxtillar" target="_blank">Lik Ho N</a>!</p>
+    </div>
+
+    <script>
+        // Show the content when the page loads
+        window.onload = function() {
+            document.body.style.display = 'block'; // Show the body
+            document.querySelector('.loader').style.display = 'none'; // Hide the loader
+            
+            // Smoothly fade in the audio
+            const audio = document.getElementById('backgroundAudio');
+            audio.volume = 0.0;
+            audio.play();
+            let fadeAudio = setInterval(() => {
+                if (audio.volume < 1.0) audio.volume += 0.01;
+                else clearInterval(fadeAudio);
+            }, 100);
+        };
+
+        // Heartfall Animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
